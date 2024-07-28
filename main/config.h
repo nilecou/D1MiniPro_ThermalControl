@@ -1,0 +1,53 @@
+#ifndef CONFIG_H
+#define CONFIG_H
+
+#include <Arduino.h>
+
+#define DEVICE "ESP8266"
+// WiFi Configuration
+constexpr const char* SSID = "Zentrum-der-Macht";
+constexpr const char* PSK = "91368372577698228206";
+
+// Time Configuration
+constexpr long UTC_OFFSET_IN_SECONDS = 7200;
+constexpr const char* NTP_SERVER = "pool.ntp.org";
+
+// Pins
+constexpr int RELAY_PIN = 0;
+constexpr int TEMP_SENSOR_PIN = 14;
+
+// Temperature Setpoints
+constexpr double DAY_TEMP_SETPOINT = 30.0;
+constexpr double NIGHT_TEMP_SETPOINT = 16.0;
+
+// Time Settings
+constexpr int HOUR_ON = 8;
+constexpr int HOUR_OFF = 18;
+
+// PID Settings
+constexpr double KP = 30.0;
+constexpr double KI = 0.1;
+constexpr double KD = 0.01;
+constexpr double BANG_BANG_on = 10.0;
+constexpr double BANG_BANG_off = 5.0;
+constexpr unsigned long PID_TIME_STEP = 240000;
+
+// Misc
+constexpr int BAUD_RATE = 19200;
+constexpr int INIT_DELAY = 5000;
+constexpr int HTTP_PORT = 80;
+
+// Modes
+constexpr const char* AUTOMATIC_MODE = "automatic";
+constexpr const char* MANUAL_MODE = "manual";
+
+//set up everything needed for data logging
+#define INFLUXDB_URL "https://eu-central-1-1.aws.cloud2.influxdata.com"
+#define INFLUXDB_TOKEN "7xxFqJ4DspK43h9WaQqeY8-oB0tygnuZxYTleqOWfcAPeVclmryI0s3diMTE5jtzhVgmcIEkMoGmbFD7IoaH1Q=="
+#define INFLUXDB_ORG "b0b04d1df364ff50"
+#define INFLUXDB_BUCKET "terrarium logger"
+//set timezone info
+#define TZ_INFO "GMT0"
+
+
+#endif // CONFIG_H
