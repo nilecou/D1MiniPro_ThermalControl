@@ -20,7 +20,7 @@ NTPClient timeClient(ntpUDP, NTP_SERVER, UTC_OFFSET_IN_SECONDS);
 WiFiServer server(HTTP_PORT);
 TSIC temperatureSensor(TEMP_SENSOR_PIN);
 
-AutoPIDRelay myPID(&inputTemperature, &currentTempSetpoint, &relaisControl, 30000, KP, KI, KD);
+AutoPIDRelay myPID(&inputTemperature, &currentTempSetpoint, &relaisControl, 20000, KP, KI, KD);
 
 Point sensor("temperature");
 
@@ -34,7 +34,7 @@ void setup() {
   delay(INIT_DELAY);
   pinMode(RELAY_PIN, OUTPUT);
   initializeWiFi();
-  myPID.setBangBang(BANG_BANG_on, BANG_BANG_off);
+  // myPID.setBangBang(BANG_BANG_on, BANG_BANG_off);   //I'm not sure, if Bang_Bang control works properly (or is set properly) trying with bang bang disabled
   myPID.setTimeStep(PID_TIME_STEP);
   timeClient.begin();
   operationMode = AUTOMATIC_MODE;
@@ -50,6 +50,7 @@ Serial.println(WiFi.localIP());
 }
 
 void loop() {
+
   timeClient.update();
   Serial.println(timeClient.getFormattedTime());
 
@@ -75,7 +76,9 @@ void controlTemperature() {
         Serial.println("Error: Temperature out of bounds or sensor error");
     } else {
         errorState = false;
-        operationMode = AUTOMATIC_MODE;
+        if (operationMode != OFF_MODE){
+          operationMode = AUTOMATIC_MODE;
+        }
     }
 
     // Check if it's nighttime and disable heating if true
@@ -90,12 +93,14 @@ void controlTemperature() {
         myPID.run();
         digitalWrite(RELAY_PIN, relaisControl);
         Serial.println("Temperature control active");
-        Serial.println(relaisControl);
+        Serial.println(myPID.getPulseValue());
     } else {
         digitalWrite(RELAY_PIN, LOW);
         Serial.println("Temperature control inactive");
         Serial.println(operationMode);
     }
+    Serial.println("At setpoint?");
+    Serial.println(myPID.atSetPoint(1));
 }
 
 
@@ -128,7 +133,7 @@ void handleClientRequests() {
   }
 
   if (request.indexOf("OffAll=1") >= 0) {
-    disableHeating();
+    killHeating();
   }
 
   if (request.indexOf("mode=1") >=0) {
@@ -181,6 +186,13 @@ void disableHeating() {
   currentTempSetpoint = 0;
   digitalWrite(RELAY_PIN, LOW);
   operationMode = MANUAL_MODE;
+  relaisControl = 0;
+}
+
+void killHeating(){
+  currentTempSetpoint = 0;
+  digitalWrite(RELAY_PIN, LOW);
+  operationMode = OFF_MODE;
   relaisControl = 0;
 }
 

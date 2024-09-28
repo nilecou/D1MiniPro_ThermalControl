@@ -28,9 +28,9 @@ constexpr int HOUR_OFF = 18;
 constexpr double KP = 30.0;
 constexpr double KI = 0.1;
 constexpr double KD = 0.01;
-constexpr double BANG_BANG_on = 10.0;
-constexpr double BANG_BANG_off = 5.0;
-constexpr unsigned long PID_TIME_STEP = 240000;
+constexpr double BANG_BANG_on = 20.0;
+constexpr double BANG_BANG_off = 10.0;
+constexpr unsigned long PID_TIME_STEP = 30000;
 
 // Misc
 constexpr int BAUD_RATE = 19200;
@@ -40,6 +40,7 @@ constexpr int HTTP_PORT = 80;
 // Modes
 constexpr const char* AUTOMATIC_MODE = "automatic";
 constexpr const char* MANUAL_MODE = "manual";
+constexpr const char* OFF_MODE = "off";
 
 //set up everything needed for data logging
 #define INFLUXDB_URL "https://eu-central-1-1.aws.cloud2.influxdata.com"
