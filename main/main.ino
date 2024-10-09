@@ -34,11 +34,15 @@ void setup() {
   delay(INIT_DELAY);
   pinMode(RELAY_PIN, OUTPUT);
   initializeWiFi();
+  // Accurate time is necessary for certificate validation and writing in batches
+  // We use the NTP servers in your area as provided by: https://www.pool.ntp.org/zone/
+  // Syncing progress and the time will be printed to Serial.
+  timeSync(TZ_INFO, "pool.ntp.org", "time.nis.gov");
   // myPID.setBangBang(BANG_BANG_on, BANG_BANG_off);   //I'm not sure, if Bang_Bang control works properly (or is set properly) trying with bang bang disabled
   myPID.setTimeStep(PID_TIME_STEP);
   timeClient.begin();
   operationMode = AUTOMATIC_MODE;
-  sensor.addTag("device", DEVICE);
+  //sensor.addTag("device", DEVICE);
   if (client.validateConnection()) {
     Serial.print("Connected to InfluxDB: ");
     Serial.println(client.getServerUrl());
@@ -149,6 +153,7 @@ void initializeWiFi() {
     delay(500);
     Serial.println("Not connected yet...");
   }
+  Serial.println("Connected to WiFi");
   server.begin();
 }
 

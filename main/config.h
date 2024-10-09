@@ -5,8 +5,8 @@
 
 #define DEVICE "ESP8266"
 // WiFi Configuration
-constexpr const char* SSID = "Zentrum-der-Macht";
-constexpr const char* PSK = "91368372577698228206";
+constexpr const char* SSID = "Tardis_D3";
+constexpr const char* PSK = "#20Nls_Jhnns24#";
 
 // Time Configuration
 constexpr long UTC_OFFSET_IN_SECONDS = 7200;
@@ -17,12 +17,12 @@ constexpr int RELAY_PIN = 0;
 constexpr int TEMP_SENSOR_PIN = 14;
 
 // Temperature Setpoints
-constexpr double DAY_TEMP_SETPOINT = 30.0;
+constexpr double DAY_TEMP_SETPOINT = 26.0;
 constexpr double NIGHT_TEMP_SETPOINT = 16.0;
 
 // Time Settings
-constexpr int HOUR_ON = 8;
-constexpr int HOUR_OFF = 18;
+constexpr int HOUR_ON = 7;
+constexpr int HOUR_OFF = 16;
 
 // PID Settings
 constexpr double KP = 30.0;
@@ -43,12 +43,12 @@ constexpr const char* MANUAL_MODE = "manual";
 constexpr const char* OFF_MODE = "off";
 
 //set up everything needed for data logging
-#define INFLUXDB_URL "https://eu-central-1-1.aws.cloud2.influxdata.com"
-#define INFLUXDB_TOKEN "7xxFqJ4DspK43h9WaQqeY8-oB0tygnuZxYTleqOWfcAPeVclmryI0s3diMTE5jtzhVgmcIEkMoGmbFD7IoaH1Q=="
-#define INFLUXDB_ORG "b0b04d1df364ff50"
-#define INFLUXDB_BUCKET "terrarium logger"
+  #define INFLUXDB_URL "https://eu-central-1-1.aws.cloud2.influxdata.com"
+  #define INFLUXDB_TOKEN "vBr1GDoyCCiHUeLkOBLnIJx0_TsZYGpR62f8Qow52WAwczBSoNX9n5glySLiZSuX7luNaDLwv3HARnah2cHAgg=="
+  #define INFLUXDB_ORG "b0b04d1df364ff50"
+  #define INFLUXDB_BUCKET "Terrarium"
 //set timezone info
-#define TZ_INFO "GMT0"
+#define TZ_INFO "GMT-2"
 
 
 #endif // CONFIG_H
