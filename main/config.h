@@ -17,20 +17,15 @@ constexpr int RELAY_PIN = 0;
 constexpr int TEMP_SENSOR_PIN = 14;
 
 // Temperature Setpoints
-constexpr double DAY_TEMP_SETPOINT = 26.0;
+constexpr double DAY_TEMP_SETPOINT = 24.0;
 constexpr double NIGHT_TEMP_SETPOINT = 16.0;
 
 // Time Settings
-constexpr int HOUR_ON = 7;
-constexpr int HOUR_OFF = 16;
+constexpr int HOUR_ON = 6;
+constexpr int HOUR_OFF = 15;
 
 // PID Settings
-constexpr double KP = 30.0;
-constexpr double KI = 0.1;
-constexpr double KD = 0.01;
-constexpr double BANG_BANG_on = 20.0;
-constexpr double BANG_BANG_off = 10.0;
-constexpr unsigned long PID_TIME_STEP = 30000;
+constexpr double KP = 20.0;
 
 // Misc
 constexpr int BAUD_RATE = 19200;
@@ -44,7 +39,7 @@ constexpr const char* OFF_MODE = "off";
 
 //set up everything needed for data logging
   #define INFLUXDB_URL "https://eu-central-1-1.aws.cloud2.influxdata.com"
-  #define INFLUXDB_TOKEN "vBr1GDoyCCiHUeLkOBLnIJx0_TsZYGpR62f8Qow52WAwczBSoNX9n5glySLiZSuX7luNaDLwv3HARnah2cHAgg=="
+  #define INFLUXDB_TOKEN "yTgunM1ZXfetCx6DEgB3tEdYGEFag6Sb_V6EFzgXBwg5T7tBCyTjGNR9ca3yVXAkQgqBf-JvJWuqs5gkuY1YxA=="
   #define INFLUXDB_ORG "b0b04d1df364ff50"
   #define INFLUXDB_BUCKET "Terrarium"
 //set timezone info
